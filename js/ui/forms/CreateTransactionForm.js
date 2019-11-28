@@ -27,7 +27,7 @@ class CreateTransactionForm extends AsyncForm{
           accountsSelect.innerHTML += `<option value="${element.id}">${element.name}</option>`;
         });
       } else {
-        console.log("Error. did not receive a list of accounts", err)
+        console.log("Error in CTF. did not receive a list of accounts", err)
       }
     });
   }

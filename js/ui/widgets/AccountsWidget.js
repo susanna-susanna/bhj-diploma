@@ -13,13 +13,12 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    this.element = element;
-    this.registerEvents();
-    this.update();
-    
     if (!element) {
       throw new Error("Error1 in AW.Element doesn't exist");
     }
+    this.element = element;
+    this.registerEvents();
+    this.update();
   }
 
   /**
@@ -31,6 +30,7 @@ class AccountsWidget {
    * */
   registerEvents() {
     this.element.addEventListener('click', (event) => {
+      event.preventDefault();
       if (event.target.closest('.create-account')) {
         App.getModal('createAccount').open();
       }
@@ -60,7 +60,7 @@ class AccountsWidget {
             this.renderItem(response.data[i]);
           }
         } else {
-          console.log("Error. Did not recieve list", err);
+          console.log("Error2 in AW. Did not recieve list", err);
         }
       });
     }

@@ -11,11 +11,11 @@ class TransactionsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    this.element = element;
-    this.registerEvents();
     if (!element) {
       throw new Error("Error1 in TrW.Element doesn't exist");
     }
+    this.element = element;
+    this.registerEvents();
   }
   /**
    * Регистрирует обработчики нажатия на
