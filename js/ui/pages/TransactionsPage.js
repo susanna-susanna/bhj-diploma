@@ -66,7 +66,7 @@ class TransactionsPage {
         this.clear();
         App.update();
       } else {
-        console.log("Error in RemoveAccount")
+        console.log("Error in RemoveAccount", err);
       }
     });
   }
@@ -82,7 +82,7 @@ class TransactionsPage {
         if (response && response.success) {
           App.update();
         } else {
-          console.log("Error in RemoveTransaction")
+          console.log("Error in RemoveTransaction", err);
         }
       });
     }
@@ -144,12 +144,23 @@ class TransactionsPage {
    * */
   formatDate( date ) {
     let newData = new Date(date);
-    
     let day = newData.getDate();
-    let month = newData.getMonth();
-    console.log(month)
+    let months = [
+      "января",
+      "февраля",
+      "марта",
+      "апреля",
+      "мая",
+      "июня",
+      "июля",
+      "августа",
+      "сентября",
+      "октября",
+      "ноября",
+      "декабря"
+    ];
+    let month = months[newData.getMonth()];
     let year = newData.getFullYear();
-    console.log(year)
     let hours = newData.getHours();
     let minutes = newData.getMinutes();
 
@@ -159,8 +170,8 @@ class TransactionsPage {
       } else {
         return number;
       }
-      return `${day} ${month} ${year} г. в ${upTime(hours)} ${upTime(minutes)}`;
     }
+    return `${day} ${month} ${year} г. в ${upTime(hours)} ${upTime(minutes)}`;
   }
 
   /**
@@ -171,7 +182,7 @@ class TransactionsPage {
     const id = item.id;
     const type = item.type;
     const name = item.name;
-    const date = this.formatDate(item);
+    const date = this.formatDate(item.created_at);
     const sum = item.sum;
     return `
       <div class="transaction transaction_${type} row">
@@ -206,9 +217,6 @@ class TransactionsPage {
     const content = this.element.querySelector('.content');
     if (data) {
       content.innerHTML = '';
-      /*for (item of data) {
-        content.innerHTML += item;
-      }*/
       for (let i = 0; i < data.length; i++) {
         content.innerHTML += this.getTransactionHTML(data[i]);
       }

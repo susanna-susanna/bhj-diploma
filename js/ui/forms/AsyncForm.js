@@ -43,7 +43,7 @@ this.registerEvents();
   getData() {
     let dataForm = {};
     let formData = new FormData(this.element);
-    console.log(Array.isArray(formData.entries()));
+    //console.log(Array.isArray(formData.entries()));
 
     for (let item of formData.entries()) {
       let key = item[0];
